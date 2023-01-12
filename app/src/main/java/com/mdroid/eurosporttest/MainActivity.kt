@@ -3,13 +3,17 @@ package com.mdroid.eurosporttest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mdroid.eurosporttest.ui.main.MainViewModel
 import com.mdroid.eurosporttest.ui.theme.EurosSportTestTheme
@@ -27,7 +31,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Column {
+                        for(news in viewModel.news.value) {
+
+                            Print(news.date.toString())
+                            Spacer(modifier = Modifier.padding(8.dp))
+                        }
+                    }
                 }
             }
         }
@@ -35,14 +45,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Print(name: String) {
+    Text(text = name)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     EurosSportTestTheme {
-        Greeting("Android")
+        Print("Android")
     }
 }
