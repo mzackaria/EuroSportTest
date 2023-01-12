@@ -3,10 +3,10 @@ package com.mdroid.eurosporttest.remote
 import com.mdroid.eurosporttest.remote.data.NewsRemote
 
 class RemoteNewsRepository(
-    val api: NewsApi
+    private val api: NewsApiService
 ) : NewsApiService {
 
     override suspend fun getNews(): NewsRemote {
-        return api.retrofitService.getNews()
+        return api.getNews()
     }
 }

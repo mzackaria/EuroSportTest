@@ -3,7 +3,7 @@ package com.mdroid.eurosporttest.remote
 import com.mdroid.eurosporttest.local.data.News
 
 class GetNewsSorted(
-    private val repository: RemoteNewsRepository
+    private val repository: NewsApiService
 ) {
 
     suspend operator fun invoke(): List<News> {
