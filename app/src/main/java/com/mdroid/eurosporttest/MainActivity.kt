@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     Column {
                         for(news in viewModel.news.value) {
 
-                            Print(news.date.toString())
+                            Print(news::class.java.name)
                             Spacer(modifier = Modifier.padding(8.dp))
                         }
                     }

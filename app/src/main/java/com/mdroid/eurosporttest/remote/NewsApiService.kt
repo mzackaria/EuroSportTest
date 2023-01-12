@@ -1,6 +1,7 @@
 package com.mdroid.eurosporttest.remote
 
 import com.mdroid.eurosporttest.remote.data.NewsRemote
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 
 

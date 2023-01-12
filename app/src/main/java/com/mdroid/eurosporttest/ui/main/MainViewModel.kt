@@ -19,6 +19,10 @@ class MainViewModel @Inject constructor(
     val news: State<List<News>> = _news
 
     init {
+        getNews()
+    }
+
+    private fun getNews() {
         viewModelScope.launch{
             _news.value = getNewsSorted()
         }
