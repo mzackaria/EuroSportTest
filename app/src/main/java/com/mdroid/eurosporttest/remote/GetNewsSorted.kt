@@ -25,7 +25,15 @@ class GetNewsSorted(
         return zipNews(videos, stories)
     }
 
+    //turn the two lists into one list of items with mixed one-by-one items (story-video-story-video.....)
     private fun zipNews(videos: List<News>, stories: List<News>): List<News> {
-        return videos.zip(stories).flatMap { listOf(it.first, it.second) } + if (videos.size > stories.size) videos.drop(stories.size) else stories.drop(videos.size)
+
+        //the list with mixed one-by-one items (story-video-story-video.....)
+        val list = videos.zip(stories).flatMap { listOf(it.first, it.second) }
+
+        //the rest of the longest list
+        val rest = stories.drop(videos.size)
+
+        return  list + rest
     }
 }
