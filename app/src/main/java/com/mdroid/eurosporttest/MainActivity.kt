@@ -31,13 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column {
-                        for(news in viewModel.news.value) {
-
-                            Print(news::class.java.name)
-                            Spacer(modifier = Modifier.padding(8.dp))
-                        }
-                    }
+                    Print(viewModel.news.value::class.java.name)
+                    Spacer(modifier = Modifier.padding(8.dp))
                 }
             }
         }
