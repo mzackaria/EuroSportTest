@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">EurosSportTest</string>
+    <string name="format_label_views">%d views</string>
+    <string name="app_bar_label">Feature</string>
+    <string name="format_label_card_story">By %s, %s ago</string>
+    <string name="minutes">min</string>
+    <string name="day">day(s)</string>
+    <string name="format_label_since">%d %s</string>
+    <string name="hours">hour(s)</string>
+    <string name="years">year(s)</string>
 </resources>

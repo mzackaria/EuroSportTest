@@ -26,8 +26,7 @@ data class VideoRemote(
     fun toLocalModel(): News.Video {
         return News.Video(
             date = date,
-            id = id,
-            sport = sport,
+            sport = sport?.toLocalModel(),
             thumb = thumb,
             title = title,
             url = url,

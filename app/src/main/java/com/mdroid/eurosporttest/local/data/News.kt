@@ -5,8 +5,7 @@ import com.mdroid.eurosporttest.remote.data.SportRemote
 open class News() {
     class Video(
         val date: Double?,
-        val id: Int?,
-        val sport: SportRemote?,
+        val sport: Sport?,
         val thumb: String?,
         val title: String?,
         val url: String?,
@@ -16,9 +15,8 @@ open class News() {
     class Story(
         val author: String?,
         val date: Double?,
-        val id: Int?,
         val image: String?,
-        val sport: SportRemote?,
+        val sport: Sport?,
         val teaser: String?,
         val title: String?
     ) : News()

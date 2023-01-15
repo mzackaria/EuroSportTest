@@ -3,20 +3,19 @@ package com.mdroid.eurosporttest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.mdroid.eurosporttest.local.data.News
+import com.mdroid.eurosporttest.ui.Screen
+import com.mdroid.eurosporttest.ui.main.MainScreen
 import com.mdroid.eurosporttest.ui.main.MainViewModel
 import com.mdroid.eurosporttest.ui.theme.EurosSportTestTheme
+import com.mdroid.eurosporttest.util.Response
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,28 +25,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             EurosSportTestTheme {
                 val viewModel = hiltViewModel<MainViewModel>()
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Print(viewModel.news.value::class.java.name)
-                    Spacer(modifier = Modifier.padding(8.dp))
-                }
+                Navigation(viewModel.news)
             }
         }
     }
 }
 
-@Composable
-fun Print(name: String) {
-    Text(text = name)
-}
 
-@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    EurosSportTestTheme {
-        Print("Android")
+fun Navigation(listofNews: State<Response<List<News>>>) {
+
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+        composable(route = Screen.MainScreen.route) {
+            MainScreen(navController, listofNews)
+        }
     }
+
 }

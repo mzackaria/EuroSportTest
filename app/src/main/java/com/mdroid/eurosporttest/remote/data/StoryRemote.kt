@@ -27,9 +27,8 @@ data class StoryRemote(
         return News.Story(
             author =  author,
             date =  date,
-            id =  id,
             image =  image,
-            sport =  sport,
+            sport =  sport?.toLocalModel(),
             teaser =  teaser,
             title =  title,
         )
