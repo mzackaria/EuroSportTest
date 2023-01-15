@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +13,7 @@ import com.mdroid.eurosporttest.local.data.News
 import com.mdroid.eurosporttest.ui.Screen
 import com.mdroid.eurosporttest.ui.main.MainScreen
 import com.mdroid.eurosporttest.ui.main.MainViewModel
+import com.mdroid.eurosporttest.ui.story.StoryScreen
 import com.mdroid.eurosporttest.ui.theme.EurosSportTestTheme
 import com.mdroid.eurosporttest.util.Response
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,14 +31,26 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @Composable
-fun Navigation(listofNews: State<Response<List<News>>>) {
+fun Navigation(listOfNews: State<Response<List<News>>>) {
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
-            MainScreen(navController, listofNews)
+            MainScreen(navController, listOfNews)
+        }
+        composable(
+            route = Screen.StoryScreen.getFinalRoute()
+        ) {entry ->
+            StoryScreen(
+                navController,
+                title = entry.arguments?.getString("title"),
+                author = entry.arguments?.getString("author"),
+                urlImage = entry.arguments?.getString("urlImage"),
+                teaser = entry.arguments?.getString("teaser"),
+                category = entry.arguments?.getString("category"),
+                since = entry.arguments?.getString("since")
+            )
         }
     }
 

@@ -3,11 +3,33 @@ package com.mdroid.eurosporttest.ui
 sealed class Screen(val route: String) {
     object MainScreen: Screen("main_screen")
     object StoryScreen: Screen("story_screen") {
-        fun withArgs(urlImage: String, teaser: String): String {
+
+        fun getFinalRoute() = buildString {
+                append(route)
+                append("?title={title}")
+                append("?author={author}")
+                append("?urlImage={urlImage}")
+                append("?teaser={teaser}")
+                append("?category={category}")
+                append("?since={since}")
+            }
+
+        fun withArgs(
+            title: String,
+            author: String,
+            urlImage: String,
+            teaser: String,
+            category: String,
+            since: String
+        ): String {
             return buildString {
                 append(route)
-                append("?urlImage={$urlImage}")
-                append("?teaser={$teaser}")
+                append("?title=$title")
+                append("?author=$author")
+                append("?urlImage=$urlImage")
+                append("?teaser=$teaser")
+                append("?category=$category")
+                append("?since=$since")
             }
         }
     }

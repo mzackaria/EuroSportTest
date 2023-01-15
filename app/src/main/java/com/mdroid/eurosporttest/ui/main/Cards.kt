@@ -1,6 +1,7 @@
 package com.mdroid.eurosporttest.ui.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -23,8 +24,12 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.mdroid.eurosporttest.R
 import com.mdroid.eurosporttest.local.data.News
+import com.mdroid.eurosporttest.ui.ImageAndCapsule
+import com.mdroid.eurosporttest.ui.Screen
+import com.mdroid.eurosporttest.ui.util.Title
 import com.mdroid.eurosporttest.util.formatLabelNumberViews
 import com.mdroid.eurosporttest.util.formatLabelStories
+import com.mdroid.eurosporttest.util.sinceFormat
 
 
 @Composable
@@ -40,57 +45,14 @@ fun NewsCard(
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onClick() },
         elevation = 8.dp
     ) {
         Column {
-            ConstraintLayout {
-                val (image, label) = createRefs()
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                        .constrainAs(image) {}
-                ) {
-                    AsyncImage(
-                        model = imageUrl,
-                        contentScale = ContentScale.FillBounds,
-                        contentDescription = null,  // decorative
-                        modifier = Modifier.align(Alignment.Center).fillMaxSize()
-                    )
-                    if (isVideo) {
-                        Image(
-                            painter = painterResource(id = R.drawable.play),
-                            contentDescription = null, // decorative
-                            contentScale = ContentScale.None,
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-
-                }
-                Surface(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .constrainAs(label) {
-                            top.linkTo(image.bottom)
-                            bottom.linkTo(image.bottom)
-                        },
-                    color = MaterialTheme.colors.primary,
-                    elevation = 8.dp,
-                    shape = RoundedCornerShape(4.dp)
-                ) {
-                    Text(
-                        text = category.uppercase(),
-                        color = Color.White,
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(8.dp)
-                    )
-                }
-            }
-            Text(
-                text = title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
+            ImageAndCapsule(imageUrl, category, isVideo)
+            Title(
+                title = title.uppercase(),
                 modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
             )
             Text(
@@ -126,12 +88,25 @@ fun StoryCard(
     story: News.Story
 ) {
 
+    //TODO pas tres beau
+    val since = sinceFormat(story.date ?: 0.0)
+
     NewsCard(
         imageUrl = story.image.toString(),
         category = story.sport?.name.toString(),
         title = story.title.toString(),
         subtitle = formatLabelStories(story.author.toString(), story.date ?: 0.0),
-        onClick = {},
+        onClick = {
+            navController.navigate(
+                Screen.StoryScreen.withArgs(
+                    title = story.title.toString(),
+                    author = story.author.toString(),
+                    urlImage = story.image.toString(),
+                    teaser = story.teaser.toString(),
+                    category = story.sport?.name.toString(),
+                    since = since
+                )
+            )},
         isVideo = false
     )
 }

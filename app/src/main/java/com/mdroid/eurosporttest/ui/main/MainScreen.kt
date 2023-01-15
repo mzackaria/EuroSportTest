@@ -30,16 +30,16 @@ fun MainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                        title = {
-                                    Text(
-                                        stringResource(R.string.app_bar_label).uppercase(),
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.fillMaxWidth()
-                                    )
-                                },
-                        backgroundColor = MaterialTheme.colors.primary,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                title = {
+                            Text(
+                                stringResource(R.string.app_bar_label).uppercase(),
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        },
+                backgroundColor = MaterialTheme.colors.primary,
+                modifier = Modifier.fillMaxWidth()
+            )
                  },
 
         content = {
