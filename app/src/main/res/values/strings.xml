@@ -12,4 +12,5 @@
     <string name="description_share_button">Share button</string>
     <string name="by">By</string>
     <string name="share">Share</string>
+    <string name="internet_error">Something went wrong</string>
 </resources>
