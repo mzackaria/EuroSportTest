@@ -15,6 +15,7 @@ import com.mdroid.eurosporttest.ui.main.MainScreen
 import com.mdroid.eurosporttest.ui.main.MainViewModel
 import com.mdroid.eurosporttest.ui.story.StoryScreen
 import com.mdroid.eurosporttest.ui.theme.EurosSportTestTheme
+import com.mdroid.eurosporttest.ui.video.VideoScreen
 import com.mdroid.eurosporttest.util.Response
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,14 +26,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             EurosSportTestTheme {
                 val viewModel = hiltViewModel<MainViewModel>()
-                Navigation(viewModel.news)
+                Navigation(
+                    viewModel.news
+                )
             }
         }
     }
 }
 
 @Composable
-fun Navigation(listOfNews: State<Response<List<News>>>) {
+fun Navigation(
+    listOfNews: State<Response<List<News>>>
+) {
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
@@ -50,6 +55,11 @@ fun Navigation(listOfNews: State<Response<List<News>>>) {
                 teaser = entry.arguments?.getString("teaser"),
                 category = entry.arguments?.getString("category"),
                 since = entry.arguments?.getString("since")
+            )
+        }
+        composable(route = Screen.VideoScreen.getFinalRoute()) { entry ->
+            VideoScreen(
+                url = entry.arguments?.getString("url").toString()
             )
         }
     }

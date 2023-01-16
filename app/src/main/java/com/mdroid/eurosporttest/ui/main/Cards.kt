@@ -77,7 +77,12 @@ fun VideoCard(
         category = video.sport?.name.toString(),
         title = video.title.toString(),
         subtitle = formatLabelNumberViews(video.views ?: 0),
-        onClick = {},
+        onClick = {
+            navController.navigate(
+                Screen.VideoScreen.withArgs(
+                    url = video.url.toString()
+                )
+            )},
         isVideo = true
     )
 }

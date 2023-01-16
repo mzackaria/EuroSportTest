@@ -33,4 +33,20 @@ sealed class Screen(val route: String) {
             }
         }
     }
+    object VideoScreen: Screen("video_screen") {
+
+        fun getFinalRoute() = buildString {
+            append(route)
+            append("?url={url}")
+        }
+
+        fun withArgs(
+            url: String
+        ): String {
+            return buildString {
+                append(route)
+                append("?url=$url")
+            }
+        }
+    }
 }

@@ -34,7 +34,7 @@ fun ImageAndCapsule(
         ) {
             AsyncImage(
                 model = imageUrl,
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 contentDescription = null,  // decorative
                 modifier = Modifier.align(Alignment.Center).fillMaxSize()
             )
