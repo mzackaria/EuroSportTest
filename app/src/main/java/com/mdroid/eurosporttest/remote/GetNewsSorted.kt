@@ -7,18 +7,17 @@ class GetNewsSorted(
 ) {
 
     suspend operator fun invoke(): List<News> {
-
         val newsRemote = repository.getNews()
 
         //sort videos by date and transform it to local model
         val videos = newsRemote.videos
-            ?.sortedBy { videoRemote -> videoRemote.date }
+            ?.sortedByDescending { videoRemote -> videoRemote.date }
             ?.map { it.toLocalModel() }
             ?: emptyList()
 
         //sort stories by date and transform it to local model
         val stories = newsRemote.stories
-            ?.sortedBy { storyRemote -> storyRemote.date }
+            ?.sortedByDescending { storyRemote -> storyRemote.date }
             ?.map { it.toLocalModel() }
             ?: emptyList()
 
