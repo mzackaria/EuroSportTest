@@ -63,7 +63,7 @@ class GetNewsSortedTest {
          val listResult = getNewsSorted()
          Assert.assertEquals(listResult.size, 5)
 
-         //assert correct entanglement between news and videos
+         //assert correct entanglement between stories and videos
          Assert.assertTrue(listResult[0] is News.Video)
          Assert.assertTrue(listResult[1] is News.Story)
          Assert.assertTrue(listResult[2] is News.Video)
@@ -97,7 +97,7 @@ class GetNewsSortedTest {
         val listResult = getNewsSorted()
         Assert.assertEquals(listResult.size, 6)
 
-        //assert correct entanglement between news and videos
+        //assert correct entanglement between stories and videos
         Assert.assertTrue(listResult[0] is News.Video)
         Assert.assertTrue(listResult[1] is News.Story)
         Assert.assertTrue(listResult[2] is News.Video)
@@ -114,6 +114,26 @@ class GetNewsSortedTest {
         Assert.assertEquals((listResult[1] as News.Story).date ?: -1.0, story2.date)
         Assert.assertEquals((listResult[3] as News.Story).date ?: -1.0, story1.date)
         Assert.assertEquals((listResult[5] as News.Story).date ?: -1.0, story.date)
+    }
+
+    @Test
+    fun test_sortVideosAndStories_NoVideos() = runBlocking{
+
+        val stories = listOf<StoryRemote>(story1, story2, story)
+        val videos = emptyList<VideoRemote>()
+        val getNewsSorted = GetNewsSorted(MockNewsApiService(stories, videos))
+        val listResult = getNewsSorted()
+        Assert.assertEquals(listResult.size, 3)
+
+        //assert correct entanglement between stories
+        Assert.assertTrue(listResult[0] is News.Story)
+        Assert.assertTrue(listResult[1] is News.Story)
+        Assert.assertTrue(listResult[2] is News.Story)
+
+        //assert correct order of stories
+        Assert.assertEquals((listResult[0] as News.Story).date ?: -1.0, story2.date)
+        Assert.assertEquals((listResult[1] as News.Story).date ?: -1.0, story1.date)
+        Assert.assertEquals((listResult[2] as News.Story).date ?: -1.0, story.date)
     }
 
  }
