@@ -8,11 +8,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.mdroid.eurosporttest.R
 import com.mdroid.eurosporttest.local.data.News
@@ -21,9 +21,9 @@ import com.mdroid.eurosporttest.util.Response
 @Composable
 fun MainScreen(
     navController: NavHostController,
-    stateListOfNews: State<Response<List<News>>>
+    viewModel: MainViewModel = hiltViewModel<MainViewModel>()
 ) {
-    val responseListOfNews = stateListOfNews.value
+    val responseListOfNews = viewModel.news.value
     Scaffold(
         topBar = {
             TopAppBar(

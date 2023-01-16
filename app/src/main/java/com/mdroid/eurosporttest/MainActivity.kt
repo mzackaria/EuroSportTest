@@ -25,24 +25,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EurosSportTestTheme {
-                val viewModel = hiltViewModel<MainViewModel>()
-                Navigation(
-                    viewModel.news
-                )
+                Navigation()
             }
         }
     }
 }
 
 @Composable
-fun Navigation(
-    listOfNews: State<Response<List<News>>>
-) {
+fun Navigation() {
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
-            MainScreen(navController, listOfNews)
+            MainScreen(navController)
         }
         composable(
             route = Screen.StoryScreen.getFinalRoute()
