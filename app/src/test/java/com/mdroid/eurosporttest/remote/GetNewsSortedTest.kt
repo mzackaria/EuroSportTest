@@ -79,6 +79,43 @@ class GetNewsSortedTest {
          Assert.assertEquals((listResult[3] as News.Story).date ?: -1.0, story1.date)
          Assert.assertEquals((listResult[4] as News.Story).date ?: -1.0, story.date)
      }
+
+    @Test
+    fun test_sortVideosAndStories_OneDateIsNull() = runBlocking{
+        val video3 = VideoRemote(
+            date = null,
+            id = 2,
+            sport = null,
+            thumb = null,
+            title = null,
+            url = null,
+            views = null
+        )
+        val stories = listOf<StoryRemote>(story1, story2, story)
+        val videos = listOf<VideoRemote>(video1, video, video3)
+        val getNewsSorted = GetNewsSorted(MockNewsApiService(stories, videos))
+        val listResult = getNewsSorted()
+        Assert.assertEquals(listResult.size, 6)
+
+        //assert correct entanglement between news and videos
+        Assert.assertTrue(listResult[0] is News.Video)
+        Assert.assertTrue(listResult[1] is News.Story)
+        Assert.assertTrue(listResult[2] is News.Video)
+        Assert.assertTrue(listResult[3] is News.Story)
+        Assert.assertTrue(listResult[4] is News.Video)
+        Assert.assertTrue(listResult[5] is News.Story)
+
+        //assert correct order of videos
+        Assert.assertEquals((listResult[0] as News.Video).date ?: -1.0, video1.date)
+        Assert.assertEquals((listResult[2] as News.Video).date ?: -1.0, video.date)
+        Assert.assertNull((listResult[4] as News.Video).date)
+
+        //assert correct order of stories
+        Assert.assertEquals((listResult[1] as News.Story).date ?: -1.0, story2.date)
+        Assert.assertEquals((listResult[3] as News.Story).date ?: -1.0, story1.date)
+        Assert.assertEquals((listResult[5] as News.Story).date ?: -1.0, story.date)
+    }
+
  }
 
 class MockNewsApiService(
