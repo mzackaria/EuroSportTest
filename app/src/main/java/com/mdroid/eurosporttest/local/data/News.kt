@@ -1,7 +1,5 @@
 package com.mdroid.eurosporttest.local.data
 
-import com.mdroid.eurosporttest.remote.data.SportRemote
-
 open class News() {
     class Video(
         val date: Double?,
