@@ -6,54 +6,69 @@ import com.mdroid.eurosporttest.remote.data.StoryRemote
 import com.mdroid.eurosporttest.remote.data.VideoRemote
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 
 class GetNewsSortedTest {
-     val video = VideoRemote(
-         date = 0.0,
-         id = 0,
-         sport = null,
-         thumb = null,
-         title = null,
-         url = null,
-         views = null
-     )
-     val story = StoryRemote(
-         author = null,
-         date = 0.0,
-         id = 0,
-         image = null,
-         sport = null,
-         teaser = null,
-         title = null
-     )
-     val video1 = VideoRemote(
-         date = 1.0,
-         id = 2,
-         sport = null,
-         thumb = null,
-         title = null,
-         url = null,
-         views = null
-     )
-     val story1 = StoryRemote(
-         author = null,
-         id = 1,
-         date = 1.0,
-         image = null,
-         sport = null,
-         teaser = null,
-         title = null
-     )
-     val story2 = StoryRemote(
-         author = null,
-         id = 2,
-         date = 2.0,
-         image = null,
-         sport = null,
-         teaser = null,
-         title = null
-     )
+
+    lateinit var video: VideoRemote
+    lateinit var video1: VideoRemote
+    lateinit var story: StoryRemote
+    lateinit var story1: StoryRemote
+    lateinit var story2: StoryRemote
+
+    @Before
+    fun setUpVideos() {
+        video = VideoRemote(
+            date = 0.0,
+            id = 0,
+            sport = null,
+            thumb = null,
+            title = null,
+            url = null,
+            views = null
+        )
+        video1 = VideoRemote(
+            date = 1.0,
+            id = 2,
+            sport = null,
+            thumb = null,
+            title = null,
+            url = null,
+            views = null
+        )
+    }
+
+    @Before
+    fun setUpStories() {
+        story = StoryRemote(
+            author = null,
+            date = 0.0,
+            id = 0,
+            image = null,
+            sport = null,
+            teaser = null,
+            title = null
+        )
+        story1 = StoryRemote(
+            author = null,
+            id = 1,
+            date = 1.0,
+            image = null,
+            sport = null,
+            teaser = null,
+            title = null
+        )
+        story2 = StoryRemote(
+            author = null,
+            id = 2,
+            date = 2.0,
+            image = null,
+            sport = null,
+            teaser = null,
+            title = null
+        )
+    }
 
      @Test
      fun test_sortVideosAndStories_Correct() = runBlocking{
