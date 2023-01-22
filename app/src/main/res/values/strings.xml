@@ -5,7 +5,7 @@
     <string name="format_label_card_story">By %s - %s</string>
     <string name="minutes">min</string>
     <string name="day">day(s)</string>
-    <string name="format_label_since">%d %s ago</string>
+    <string name="format_label_since">%s ago</string>
     <string name="hours">hour(s)</string>
     <string name="years">year(s)</string>
     <string name="description_back_button">Back button</string>
@@ -13,4 +13,5 @@
     <string name="by">By</string>
     <string name="share">Share</string>
     <string name="internet_error">Something went wrong</string>
+    <string name="a_few_seconds_label">A few seconds</string>
 </resources>
